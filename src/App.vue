@@ -6,8 +6,9 @@ import Form from './components/Form.vue';
 
 const state = reactive({
   filter: 'choose',
-  firstNumber: 0,
-  secondeNumber: 0,
+  firstNumber: '',
+  secondeNumber: '',
+  clean: null,
 })
 
 
@@ -54,6 +55,8 @@ const operations = () => {
       return divide();
   }
 
+
+
 }
 
 const unhideResult = () => {
@@ -66,6 +69,19 @@ const unhideResult = () => {
 }
 
 
+
+
+function clearFirstInput() {
+  const clean = state.clean
+  return state.firstNumber = clean
+}
+
+function clearSecondInput() {
+  const clean = state.clean
+  return state.secondeNumber = clean
+}
+
+
 </script>
 
 <template>
@@ -75,7 +91,9 @@ const unhideResult = () => {
       <Form :alternate-operation-symbol="alternateOperationSymbol()" :operations="operations()"
         :unhide-result="unhideResult()" :get-filter-value="event => state.filter = event.target.value"
         :get-first-input-value="event => state.firstNumber = event.target.value"
-        :get-second-input-value="event => state.secondeNumber = event.target.value" />
+        :get-second-input-value="event => state.secondeNumber = event.target.value" :clear-first-input="clearFirstInput"
+        :clear-first-number="state.firstNumber" :clear-second-input="clearSecondInput"
+        :clear-second-number="state.secondeNumber" />
     </div>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps(['alternateOperationSymbol', 'operations', 'unhideResult', 'getFilterValue', 'getFirstInputValue', 'getSecondInputValue'])
+const props = defineProps(['alternateOperationSymbol', 'operations', 'unhideResult', 'getFilterValue', 'getFirstInputValue', 'getSecondInputValue', 'clearFirstInput', 'clearFirstNumber', 'clearSecondInput', 'clearSecondNumber'])
 </script>
 
 
@@ -13,9 +13,13 @@ const props = defineProps(['alternateOperationSymbol', 'operations', 'unhideResu
             <option value="multiply">Multiplicar</option>
             <option value="divide">Dividir</option>
         </select>
-        <input @keyup="props.getFirstInputValue" type="number" placeholder="digite o primeiro valor">
+        <button type="button" @click="props.clearFirstInput">Limpar</button>
+        <input @keyup="props.getFirstInputValue" type="number" placeholder="digite o primeiro valor"
+            :value="props.clearFirstNumber">
         <span v-text="props.alternateOperationSymbol"></span>
-        <input @keyup="props.getSecondInputValue" type="number" placeholder="digite o segundo valor">
+        <button type="button" @click="props.clearSecondInput">Limpar</button>
+        <input @keyup="props.getSecondInputValue" type="number" placeholder="digite o segundo valor"
+            :value="props.clearSecondNumber">
         <label>Resultado: </label>
         <span class="result" v-text="props.operations" v-if="props.unhideResult !== 'choose'"></span>
     </form>
@@ -97,6 +101,15 @@ span {
     padding: 16px;
     background-color: #12e752;
     color: #07245a;
+}
+
+button {
+    border-radius: 4px;
+    border: #07245a;
+    color: #fff;
+    font-size: 1rem;
+    background-color: #072f79;
+    cursor: pointer;
 }
 
 @media (max-width: 700px) {
